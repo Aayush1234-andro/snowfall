@@ -14,20 +14,38 @@ function setup() {
   createCanvas(800,400);
   sound.play();
 
+  invisibleGround = createSprite(400,350,400,10);
+  invisibleGround.visible = false;
+  boy = createSprite(400,300,10,10)
+  boy.scale= 0.05
+  boy.addImage(boyImg)
+ 
+
+
 }
 
 function draw() {
   background(bgImg);  
-  boy = createSprite(400,300,10,10)
-  boy.scale= 0.05
-  boy.addImage(boyImg)
+  
+  boy.velocityX=0
+  if(keyIsDown(LEFT_ARROW)) {
+    boy.velocityX=-1;
+}
+
+  if(keyIsDown(RIGHT_ARROW)) {
+    boy.velocityX=1;
+  }
+
+
+//add gravity
+
+boy.collide(invisibleGround);
   
   
 
   createSnowflake();
   drawSprites();
 }
-
 function createSnowflake(){
   if(frameCount%5===0){
   snowflake = createSprite(random(0,800), 0, 50, 50);
